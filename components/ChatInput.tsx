@@ -24,7 +24,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
       onSendMessage(input.trim());
       setInput('');
       if (textareaRef.current) {
-         textareaRef.current.style.height = 'auto'; // Reset height
+         textareaRef.current.style.height = 'auto';
       }
     }
   };
@@ -41,13 +41,11 @@ export const ChatInput: React.FC<ChatInputProps> = ({
     if (file && onFileUpload) {
       onFileUpload(file);
     }
-    // Reset input
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
   };
 
-  // Auto-resize textarea
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
@@ -59,9 +57,9 @@ export const ChatInput: React.FC<ChatInputProps> = ({
     <div className="w-full max-w-3xl mx-auto px-4 pb-6 pt-2">
       <form 
         onSubmit={handleSubmit}
-        className="relative flex items-end gap-2 bg-surface border border-border rounded-[2rem] p-2 pl-4 transition-all focus-within:border-white/30 focus-within:bg-surfaceHover"
+        className="relative flex items-end gap-2 bg-[#131314] border border-transparent rounded-[2rem] p-2 pl-4 transition-all focus-within:bg-[#1e1e1f] focus-within:border-white/10"
       >
-        <div className="flex items-center justify-center pb-2 text-white/50">
+        <div className="flex items-center justify-center pb-3 text-white/50 shrink-0">
           <Sparkles className="w-5 h-5" />
         </div>
 
@@ -73,10 +71,10 @@ export const ChatInput: React.FC<ChatInputProps> = ({
           placeholder={placeholder}
           disabled={disabled}
           rows={1}
-          className="flex-1 bg-transparent border-none outline-none resize-none text-white placeholder-white/40 max-h-[120px] py-2.5 px-2 text-base leading-relaxed no-scrollbar"
+          className="flex-1 bg-transparent border-none outline-none resize-none text-white placeholder-white/40 max-h-[120px] py-3 px-2 text-[15px] leading-relaxed no-scrollbar"
         />
 
-        <div className="flex items-center gap-1 pb-1 pr-1">
+        <div className="flex items-center gap-1 pb-1 pr-1 shrink-0">
           {onFileUpload && (
             <>
               <input 

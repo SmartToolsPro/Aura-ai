@@ -146,8 +146,8 @@ export const Orb: React.FC<OrbProps> = ({ isActive, onClick, onClose }) => {
   return (
     <div className={`relative flex flex-col items-center justify-center transition-all duration-700 ease-in-out ${isActive ? 'scale-125 my-12' : 'scale-100'}`}>
       <div className="relative flex items-center justify-center w-32 h-32">
-        <div className={`absolute rounded-full border border-white/20 transition-all duration-1000 ${isActive ? 'w-[150%] h-[150%] animate-ping-slow' : 'w-full h-full'}`}></div>
-        <div className={`absolute rounded-full border border-white/10 transition-all duration-1000 delay-150 ${isActive ? 'w-[200%] h-[200%] animate-ping-slow' : 'w-[120%] h-[120%]'}`}></div>
+        <div className={`absolute rounded-full border border-white/10 transition-all duration-1000 ${isActive ? 'w-[150%] h-[150%] animate-ping-slow' : 'w-full h-full'}`}></div>
+        <div className={`absolute rounded-full border border-white/5 transition-all duration-1000 delay-150 ${isActive ? 'w-[200%] h-[200%] animate-ping-slow' : 'w-[120%] h-[120%]'}`}></div>
         <div className={`absolute rounded-full border border-white/5 transition-all duration-1000 delay-300 ${isActive ? 'w-[250%] h-[250%] animate-ping-slow' : 'w-[140%] h-[140%]'}`}></div>
         
         <div className={`absolute w-20 h-20 rounded-full transition-all duration-500 ${isActive ? 'bg-white/30 blur-2xl' : 'bg-white/10 blur-xl'}`}></div>
@@ -155,16 +155,16 @@ export const Orb: React.FC<OrbProps> = ({ isActive, onClick, onClose }) => {
         <button 
           onClick={handleOrbClick}
           className={`z-10 rounded-full flex items-center justify-center transition-all duration-500 ease-out animate-float
-            ${isActive ? 'w-24 h-24 bg-white text-black shadow-[0_0_80px_rgba(255,255,255,0.8)]' : 'w-20 h-20 bg-white/90 text-black shadow-[0_0_40px_rgba(255,255,255,0.5)] hover:scale-105 hover:bg-white'}
+            ${isActive ? 'w-24 h-24 bg-white text-black shadow-[0_0_80px_rgba(255,255,255,0.8)]' : 'w-20 h-20 bg-white text-black shadow-[0_0_40px_rgba(255,255,255,0.2)] hover:scale-105'}
           `}
         >
           {isActive ? (
             isListening ? <Mic className="w-8 h-8 animate-pulse text-red-500" /> :
             isProcessing ? <div className="flex gap-1"><div className="w-2 h-2 rounded-full bg-black animate-bounce"></div><div className="w-2 h-2 rounded-full bg-black animate-bounce delay-100"></div><div className="w-2 h-2 rounded-full bg-black animate-bounce delay-200"></div></div> :
             isSpeaking ? <Sparkles className="w-8 h-8 animate-pulse text-blue-500" /> :
-            <Mic className="w-8 h-8" />
+            <Mic className="w-8 h-8 text-black" />
           ) : (
-            <Sparkles className="w-8 h-8" />
+            <Sparkles className="w-8 h-8 text-black" strokeWidth={1.5} />
           )}
         </button>
       </div>
