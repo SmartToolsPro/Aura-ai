@@ -17,10 +17,6 @@ export const sendChatMessage = async (
       }
     });
 
-    // To simulate history in this basic implementation, we just send the message.
-    // For a robust implementation, you'd initialize the chat with history if the SDK supported it directly in create,
-    // or send the full context as part of the new message.
-    // Here we just use the simplified chat approach.
     const response = await chat.sendMessage({ message: message });
     return response.text || 'I could not generate a response.';
   } catch (error) {
@@ -86,7 +82,7 @@ export const analyzeDataFile = async (data: string, prompt: string = "Analyze th
   const ai = getClient();
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-3-pro-preview', // Pro model is better for complex data analysis
+      model: 'gemini-3-pro-preview',
       contents: `Context: Here is the data to analyze.\n\n${data}\n\nTask: ${prompt}`,
     });
     return response.text || "No insights could be generated from this data.";

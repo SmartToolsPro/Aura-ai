@@ -55,6 +55,12 @@
 </script>
 </head>
   <body class="bg-background text-white h-screen w-screen overflow-hidden antialiased selection:bg-white/30 selection:text-white">
-    <div id="root" class="h-full w-full"></div>
+    <div id="root" class="h-full w-full flex items-center justify-center">
+        <div class="text-center p-6">
+            <div class="w-8 h-8 border-4 border-white/20 border-t-white rounded-full animate-spin mx-auto mb-4"></div>
+            <p class="text-white/70 font-light tracking-widest uppercase text-sm">Loading Aura AI...</p>
+            <p class="text-white/30 text-xs mt-4 max-w-xs mx-auto">If this screen does not disappear, your Netlify deployment might be missing a build step (like Vite) to compile the React files.</p>
+        </div>
+    </div>
   </body>
 </html>

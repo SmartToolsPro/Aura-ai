@@ -8,7 +8,6 @@ interface OrbProps {
   onClose?: () => void;
 }
 
-// Ensure TypeScript knows about standard web speech APIs
 declare global {
   interface Window {
     SpeechRecognition: any;
@@ -24,13 +23,12 @@ export const Orb: React.FC<OrbProps> = ({ isActive, onClick, onClose }) => {
   const [recognitionInstance, setRecognitionInstance] = useState<any>(null);
 
   useEffect(() => {
-    // Initialize speech recognition
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (SpeechRecognition) {
       const recognition = new SpeechRecognition();
       recognition.continuous = false;
       recognition.interimResults = true;
-      recognition.lang = 'ur-PK'; // Set strictly to Pakistani Urdu
+      recognition.lang = 'ur-PK';
 
       recognition.onstart = () => setIsListening(true);
       
@@ -50,7 +48,6 @@ export const Orb: React.FC<OrbProps> = ({ isActive, onClick, onClose }) => {
 
       recognition.onend = () => {
         setIsListening(false);
-        // Process the final transcript if we have one and it wasn't aborted manually
         if (transcript) {
            processVoiceCommand(transcript);
         }
@@ -65,7 +62,7 @@ export const Orb: React.FC<OrbProps> = ({ isActive, onClick, onClose }) => {
     setIsProcessing(true);
     try {
       const responseText = await voiceAssistantConverse(text);
-      setTranscript(responseText); // Show what it's saying
+      setTranscript(responseText);
       speakResponse(responseText);
     } catch (error) {
       setTranscript("معاف کیجئے گا، ایک خرابی پیش آ گئی ہے۔");
@@ -80,16 +77,14 @@ export const Orb: React.FC<OrbProps> = ({ isActive, onClick, onClose }) => {
     }
 
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'ur-PK'; // Ensure synthesis uses Pakistani Urdu voice
+    utterance.lang = 'ur-PK';
     utterance.onstart = () => {
       setIsSpeaking(true);
       setIsProcessing(false);
     };
     utterance.onend = () => {
       setIsSpeaking(false);
-      setTranscript(''); // Clear transcript after speaking
-      
-      // Optionally auto-close or go back to idle state after speaking
+      setTranscript('');
       if (onClose) {
           setTimeout(onClose, 1000);
       }
@@ -130,7 +125,6 @@ export const Orb: React.FC<OrbProps> = ({ isActive, onClick, onClose }) => {
       }
     } else {
       onClick();
-      // Start listening immediately upon activation if available
       setTimeout(() => {
         if (recognitionInstance) {
             setTranscript('');
@@ -142,28 +136,22 @@ export const Orb: React.FC<OrbProps> = ({ isActive, onClick, onClose }) => {
     }
   };
 
-  // Clean up on unmount
   useEffect(() => {
     return () => {
       if (window.speechSynthesis) window.speechSynthesis.cancel();
       if (recognitionInstance && isListening) recognitionInstance.stop();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className={`relative flex flex-col items-center justify-center transition-all duration-700 ease-in-out ${isActive ? 'scale-125 my-12' : 'scale-100'}`}>
-      {/* Orb Container */}
       <div className="relative flex items-center justify-center w-32 h-32">
-        {/* Animated Rings */}
         <div className={`absolute rounded-full border border-white/20 transition-all duration-1000 ${isActive ? 'w-[150%] h-[150%] animate-ping-slow' : 'w-full h-full'}`}></div>
         <div className={`absolute rounded-full border border-white/10 transition-all duration-1000 delay-150 ${isActive ? 'w-[200%] h-[200%] animate-ping-slow' : 'w-[120%] h-[120%]'}`}></div>
         <div className={`absolute rounded-full border border-white/5 transition-all duration-1000 delay-300 ${isActive ? 'w-[250%] h-[250%] animate-ping-slow' : 'w-[140%] h-[140%]'}`}></div>
         
-        {/* Glow behind the core */}
         <div className={`absolute w-20 h-20 rounded-full transition-all duration-500 ${isActive ? 'bg-white/30 blur-2xl' : 'bg-white/10 blur-xl'}`}></div>
 
-        {/* Core Button */}
         <button 
           onClick={handleOrbClick}
           className={`z-10 rounded-full flex items-center justify-center transition-all duration-500 ease-out animate-float
@@ -181,7 +169,6 @@ export const Orb: React.FC<OrbProps> = ({ isActive, onClick, onClose }) => {
         </button>
       </div>
 
-      {/* Assistant Status/Transcript */}
       {isActive && (
         <div className="mt-16 text-center max-w-xs transition-opacity duration-500">
           <p className="text-white/60 text-sm mb-2 uppercase tracking-widest font-semibold" dir="rtl">
