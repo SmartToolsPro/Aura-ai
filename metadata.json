@@ -1,0 +1,7 @@
+{
+  "name": "Aura AI",
+  "description": "A dark modern minimal AI web application featuring real-time chat, voice assistant, image generation, news fetching, and data analysis powered by Gemini.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
