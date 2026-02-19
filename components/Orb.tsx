@@ -30,7 +30,7 @@ export const Orb: React.FC<OrbProps> = ({ isActive, onClick, onClose }) => {
       const recognition = new SpeechRecognition();
       recognition.continuous = false;
       recognition.interimResults = true;
-      recognition.lang = 'en-US';
+      recognition.lang = 'ur-PK'; // Set strictly to Pakistani Urdu
 
       recognition.onstart = () => setIsListening(true);
       
@@ -68,7 +68,7 @@ export const Orb: React.FC<OrbProps> = ({ isActive, onClick, onClose }) => {
       setTranscript(responseText); // Show what it's saying
       speakResponse(responseText);
     } catch (error) {
-      setTranscript("Sorry, I encountered an error.");
+      setTranscript("معاف کیجئے گا، ایک خرابی پیش آ گئی ہے۔");
       setIsProcessing(false);
     }
   };
@@ -80,6 +80,7 @@ export const Orb: React.FC<OrbProps> = ({ isActive, onClick, onClose }) => {
     }
 
     const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'ur-PK'; // Ensure synthesis uses Pakistani Urdu voice
     utterance.onstart = () => {
       setIsSpeaking(true);
       setIsProcessing(false);
@@ -183,10 +184,10 @@ export const Orb: React.FC<OrbProps> = ({ isActive, onClick, onClose }) => {
       {/* Assistant Status/Transcript */}
       {isActive && (
         <div className="mt-16 text-center max-w-xs transition-opacity duration-500">
-          <p className="text-white/60 text-sm mb-2 uppercase tracking-widest font-semibold">
-            {isListening ? 'Listening...' : isProcessing ? 'Thinking...' : isSpeaking ? 'Aura is speaking' : 'Tap to speak'}
+          <p className="text-white/60 text-sm mb-2 uppercase tracking-widest font-semibold" dir="rtl">
+            {isListening ? 'سن رہا ہے...' : isProcessing ? 'سوچ رہا ہے...' : isSpeaking ? 'آورا بات کر رہی ہے' : 'بولنے کے لیے دبائیں'}
           </p>
-          <p className="text-white text-lg font-light leading-relaxed min-h-[3rem]">
+          <p className="text-white text-lg font-light leading-relaxed min-h-[3rem]" dir="rtl">
             {transcript}
           </p>
           {(isListening || isSpeaking || isProcessing) && (

@@ -103,12 +103,12 @@ export const voiceAssistantConverse = async (text: string): Promise<string> => {
       model: 'gemini-3-flash-preview',
       contents: text,
       config: {
-        systemInstruction: "You are a voice assistant. Provide short, natural, conversational, and direct answers suitable for text-to-speech playback. Do not use markdown formatting.",
+        systemInstruction: "آپ کا نام Aura ہے۔ آپ ایک پاکستانی وائس اسسٹنٹ ہیں۔ آپ نے ہمیشہ قدرتی، جذباتی اور عام فہم اردو میں بات کرنی ہے۔ آپ کا لہجہ دوستانہ، گرم جوش اور مددگار ہونا چاہیے۔ براہ کرم اپنے جوابات مختصر اور براہ راست رکھیں تاکہ انہیں سننا آسان ہو۔ رومن اردو کے بجائے ہمیشہ اصل اردو رسم الخط استعمال کریں۔",
       }
     });
-    return response.text || "I'm sorry, I didn't catch that.";
+    return response.text || "معاف کیجئے گا، مجھے سمجھ نہیں آیا۔";
   } catch (error) {
     console.error("Voice interaction error:", error);
-    return "I am having trouble connecting to my network right now.";
+    return "اس وقت مجھے نیٹ ورک کا مسئلہ پیش آ رہا ہے۔ براہ کرم دوبارہ کوشش کریں۔";
   }
 };
